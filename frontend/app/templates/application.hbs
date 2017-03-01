@@ -1,0 +1,10 @@
+{{#if showLayout}}
+  {{partial 'layout/header'}}
+  {{partial 'layout/navbar'}}
+  <main id="content">
+    {{outlet}}
+  </main>
+  {{partial 'layout/footer'}}
+{{else}}
+  {{outlet}}
+{{/if}}

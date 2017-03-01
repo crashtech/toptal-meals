@@ -1,0 +1,40 @@
+{{#each messages as |item|}}
+  {{#if item.string}}
+    {{#bs-alert visible=true fade=true type=item.type dismissible=true}}
+      <p>
+        <i class="glyphicon glyphicon-{{item.icon}}"></i>
+        {{{item.content}}}
+      </p>
+    {{/bs-alert}}
+  {{else if item.array}}
+    {{#bs-alert visible=true fade=true type=item.type dismissible=true}}
+      <i class="glyphicon glyphicon-{{item.icon}}"></i>
+      <div>
+        <ul>
+          {{#each item.content as |piece|}}
+            <li>{{{piece}}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/bs-alert}}
+  {{else if item.object}}
+    {{#bs-alert visible=true fade=true type=item.type dismissible=true}}
+      <i class="glyphicon glyphicon-{{item.icon}}"></i>
+      <div>
+        {{#if item.content.header}}
+          <h4>{{{item.content.header}}}</h4>
+        {{/if}}
+        {{#if item.content.body}}
+          <p>{{{item.content.body}}}</p>
+        {{/if}}
+        {{#if item.content.messages}}
+          <ul>
+            {{#each item.content.messages as |piece|}}
+              <li>{{{piece}}}</li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </div>
+    {{/bs-alert}}
+  {{/if}}
+{{/each}}

@@ -1,0 +1,87 @@
+// General tables, record tables and tables panels style
+main#content nav.table-navbar {
+  > div.container-fluid {
+    padding: 0;
+
+    @media only screen and (max-width: 767px) {
+      padding: 0 15px;
+      .navbar-nav {
+        margin: 5px -15px;
+        li {
+          float: left;
+        }
+      }
+    }
+
+    ul.navbar-right {
+      margin: 0;
+    }
+
+    // Search style
+    .search {
+      min-height: 50px;
+      position: relative;
+      background-color: white;
+      border-left: 1px solid lighten(@gray-light, 30%);
+
+      @media only screen and (max-width: 767px) {
+        top: 0;
+        right: 0;
+        position: absolute;
+      }
+
+      label {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        cursor: text;
+        line-height: 30px;
+        position: absolute;
+        text-align: center;
+      }
+
+      input#q {
+        border: none;
+        height: 30px;
+        margin: 10px;
+        background: none;
+        padding-left: 10px;
+        padding-right: 30px;
+      }
+    }
+  }
+}
+
+main#content div.table-panel {
+  // Table customization
+  table {
+    > thead th {
+      text-align: center;
+    }
+
+    > tbody {
+      // Actions style
+      tr td:last-of-type i {
+        margin: 0 5px;
+      }
+    }
+
+    // Footer button and pagination
+    > tfoot {
+      ul.pagination {
+        margin: 0;
+        float: right;
+      }
+    }
+  }
+}
+
+main#content table.record-table {
+  tr td:first-of-type {
+    width: 20%;
+    min-width: 150px;
+    max-width: 300px;
+    text-align: right;
+    font-weight: bold;
+  }
+}

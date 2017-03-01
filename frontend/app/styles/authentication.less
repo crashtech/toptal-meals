@@ -1,0 +1,30 @@
+// Style for login page
+div.authentication {
+  min-height: 100vh;
+  position: relative;
+
+  // Centralize the forms
+  .mainbox {
+    min-height: 100vh;
+    position: relative;
+    > .panel {
+      top: 50%;
+      width: 100%;
+      position: absolute;
+      margin-top: -21px;
+
+      -webkit-transform: translate(0, -50%);
+      -moz-transform:    translate(0, -50%);
+      -ms-transform:     translate(0, -50%);
+      -o-transform:      translate(0, -50%);
+    }
+  }
+
+  // Fix form style
+  form {
+    margin-bottom: -15px;
+    > .form-group > .controls:last-of-type {
+      padding-top: 17px;
+    }
+  }
+}

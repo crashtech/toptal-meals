@@ -1,0 +1,79 @@
+// Header style
+body > .ember-view > header {
+  border-radius: 0;
+  background-image: none;
+  background-color: darken(@brand-primary, 10%);
+  border-color: transparent;
+
+  > div.container-fluid {
+    .navbar-header {
+      width: 255px;
+    }
+    > div > a, > ul > li > a {
+      color: white;
+      &:focus {
+        color: white;
+      }
+      &:hover {
+        color: white;
+        background-color: fade(white, 5%);
+      }
+    }
+    .glyphicon-user {
+      margin-right: 10px;
+    }
+    .open.dropdown > a {
+      color: white;
+      font-weight: bold;
+      background-image: none;
+      background-color: @brand-primary;
+    }
+  }
+
+  // Mobile style
+  @media only screen and (max-width: 767px) {
+    > div.container-fluid {
+      // Brand
+      .navbar-header {
+        margin: 0 auto;
+        text-align: center;
+        margin-bottom: -45px;
+        a {
+          float: none;
+          display: inline-block;
+        }
+      }
+
+      // Icon menus
+      > ul {
+        margin: 0;
+        float: right;
+      }
+      > ul:first-of-type {
+        margin-right: -10px;
+      }
+
+      // Dropdownb
+      ul.dropdown-menu {
+        right: 0;
+        left: auto;
+        margin-top: 5px;
+        text-align: right;
+        position: absolute;
+        background-color: white;
+        border: 1px solid lighten(@gray-light, 30%);
+        border-top: none;
+      }
+    }
+  }
+
+  // Extra mobile style
+  @media only screen and (max-width: 480px) {
+    > div.container-fluid > ul:last-of-type {
+      display: none;
+    }
+    span.user-name {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+<li class="{{unless hasFirstPage 'disabled'}}"><a {{action page data.first}}>&laquo;</a></li>
+<li class="{{unless hasFirstPage 'disabled'}}"><a {{action page data.prev}}>&lsaquo;</a></li>
+{{#each pages as |item|}}
+  <li class="{{if item.current 'active'}}"><a {{action page item.number}}>{{item.number}}</a></li>
+{{/each}}
+<li class="{{unless hasLastPage 'disabled'}}"><a {{action page data.next}}>&rsaquo;</a></li>
+<li class="{{unless hasLastPage 'disabled'}}"><a {{action page data.last}}>&raquo;</a></li>

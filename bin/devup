@@ -1,0 +1,93 @@
+#!/bin/bash
+
+RUBY_VERSION="2.3.1"
+NODE_VERSION="v6.9.4"
+BIN_PATH=1
+SPRING=0
+MYSQL=0
+
+RVM_RUNNER="rvm $RUBY_VERSION"
+
+#  Show help
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+  echo "Starts the env for developing this application"
+  echo "Arguments are: [rails server port] [ember server port] [gemset name]"
+  exit 0
+fi
+
+# Check node version
+if [ $(node -v) != $NODE_VERSION ]
+then
+  echo "This application requires node $NODE_VERSION, please provide it" >&2
+  exit 1
+fi
+
+# Install the ruby version
+rvm install $RUBY_VERSION
+
+if [ $? -eq 1 ]
+then
+  echo "RVM could not install the ruby version needed" >&2
+  exit 1
+fi
+
+# Save the version
+echo "ruby=ruby-$RUBY_VERSION" > ".versions.conf"
+
+# Check gemset
+if [ "$3" != "" ]
+then
+  $RVM_RUNNER do rvm gemset create $3
+  echo "ruby-gemset=$3" >> ".versions.conf"
+  RVM_RUNNER="$RVM_RUNNER@$3"
+fi
+
+# Prepend bin path
+if [ $BIN_PATH -eq 1 ]
+then
+  echo "env-PATH=$PWD/bin:\$PATH" >> ".versions.conf"
+fi
+
+# Spring status
+echo "env-DISABLE_SPRING=$((1 - $SPRING))" >> ".versions.conf"
+
+# Create the .env with basic data
+echo "# Configure the env for this application" > ".env"
+echo "DATABASE_NAME=$3_dev" >> ".env"
+echo "DATABASE_TEST_NAME=$3_test" >> ".env"
+echo "DATABASE_USERNAME=root" >> ".env"
+echo "DATABASE_PASSWORD=" >> ".env"
+
+if [ $MYSQL -eq 1 ]
+then
+  echo "DATABASE_SOCKET=/var/lib/mysql/mysql.sock" >> ".env"
+fi
+
+echo "" >> ".env"
+if [ "$1" != "" ]
+then
+  echo "PORT=$1" >> ".env"
+else
+  echo "PORT=3000" >> ".env"
+fi
+
+echo "" >> ".env"
+echo "EMBER_PORT=$2" >> ".env"
+echo "EMBER_LIVERELOAD=35729" >> ".env"
+
+# Open .evn to be edited
+vi .env
+
+# Install bower dependency
+npm install -g bower
+
+# Install rake and bundler needed to setup the application
+$RVM_RUNNER do gem install bundler --no-doc --no-ri
+$RVM_RUNNER do bundle install
+
+# Mailcatcher doesn't work with rails 5, so install it apart
+$RVM_RUNNER do gem install mailcatcher --no-doc --no-ri
+
+# Finnaly run the rake task to up the application
+$RVM_RUNNER do bundle exec rake "app:setup"

@@ -1,0 +1,71 @@
+// Load bootstrap less assets
+@import 'ember-bootstrap/bootstrap';
+@import 'ember-bootstrap/theme';
+
+// Application additional styles
+@import 'authentication';
+@import 'flash-messages';
+@import 'power-select';
+@import 'main-content';
+@import 'sidebar';
+@import 'header';
+@import 'tables';
+
+// Some basic styles
+html, body {
+  height: 100%;
+}
+
+// Background color and font
+body {
+  font-size: 13px;
+  line-height: 1.33;
+  background: @gray-lighter;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: @gray-darker;
+}
+
+// Links with ember action
+a[data-ember-action] {
+  cursor: pointer;
+}
+
+// Displaying required fields
+label.required:after {
+  content: ' *';
+  color: darken(@brand-danger, 20%);
+}
+
+// Centralize input text
+.input-text-center input {
+  text-align: center;
+}
+
+// Brand style
+.brand > i.glyphicon {
+  float: left;
+  margin-right: 15px;
+}
+
+// Prevent resizing of textarea
+textarea {
+  resize: vertical;
+}
+
+// Keep the view at full size
+body > .ember-view {
+  min-height: 100%;
+  position: relative;
+
+  // Footer style
+  > footer {
+    bottom: 0;
+    width: 100%;
+    z-index: 250;
+    position: absolute;
+    border-top: 2px solid darken(@brand-primary, 10%);
+    background-color: white;
+    line-height: 48px;
+    min-height: 48px;
+  }
+}

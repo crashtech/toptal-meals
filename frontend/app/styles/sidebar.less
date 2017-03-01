@@ -1,0 +1,113 @@
+// Left bar style
+body > .ember-view > nav.sidebar {
+  top: 0;
+  left: 0;
+  margin: 0;
+  width: 270px;
+  height: 100%;
+  border: none;
+  z-index: 500;
+  padding: 70px 0;
+  box-shadow: none;
+  background: none;
+  border-radius: 0;
+  min-height: 100vh;
+  position: absolute;
+  background-color: @gray-darker;
+
+  // Container without space
+  > div.container-fluid {
+    margin: 0;
+    padding: 0;
+
+    // General links style
+    a {
+      margin: 5px 0;
+      padding: 0 10px;
+      display: block;
+      line-height: 40px;
+      text-decoration: none;
+      background-color: fade(white, 0%);
+      transition: color 200ms, background 200ms;
+      &:hover {
+        background-color: fade(white, 5%);
+      }
+    }
+
+    // Menu items style
+    nav > a {
+      color: lighten(#000, 60%);
+      &.active:after {
+        left: 100%;
+        width: 0px;
+        height: 0px;
+        content: '';
+        margin-top: 10px;
+        border-top: 10px solid transparent;
+        border-left: 8px solid @gray-darker;
+        border-bottom: 10px solid transparent;
+        position: absolute;
+      }
+      &.active, &:hover {
+        color: white;
+      }
+
+      &.active ~ a.active {
+        color: lighten(#000, 60%);
+        &:hover {
+          color: white;
+        }
+        &:after {
+          display: none;
+        }
+      }
+    }
+
+    // Sections
+    section {
+      > header > a {
+        font-size: 1.4em;
+        color: lighten(@brand-primary, 10%);
+      }
+      > nav {
+        padding-left: 15px;
+      }
+    }
+  }
+
+  // Mobile style
+  @media only screen and (max-width: 767px) {
+    width: 0;
+    z-index: 2000;
+    background: none;
+    padding-top: 50px;
+
+    // Toggler
+    button.navbar-toggle {
+      top: 8px;
+      left: 8px;
+      margin: 0;
+      border: none;
+      position: absolute;
+      background: none;
+      .icon-bar {
+        background-color: white;
+      }
+    }
+
+    // Menu
+    div.navbar-collapse {
+      margin: 0;
+      width: 270px;
+      border: none;
+      padding: 0 20px;
+      position: absolute;
+      background-color: @gray-darker;
+      &:before, &:after {
+        content: '';
+        height: 15px;
+        display: block;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+// Flash notifications
+.flash.messages  {
+  // All alerts style
+  > div.alert {
+    position: relative;
+    &:after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+
+    // Large icons
+    > i.glyphicon {
+      float: left;
+      font-size: 3rem;
+      + div {
+        padding-left: 50px;
+      }
+    }
+
+    // Lists
+    ul {
+      margin: 0;
+      padding-left: 2.5rem;
+    }
+  }
+}

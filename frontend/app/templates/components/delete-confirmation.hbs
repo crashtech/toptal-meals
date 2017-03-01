@@ -1,0 +1,11 @@
+{{flash-messages}}
+{{#bs-alert visible=true type='danger'}}
+  <div>
+    {{yield}}
+    {{#unless undone}}
+      <p>Please confirm before proceeding, this action cannot be undone.</p>
+    {{/unless}}
+    <a {{action confirm}} class="btn btn-danger">Confirm</a>
+    <a {{action (go-back)}} class="btn btn-default">Cancel</a>
+  </div>
+{{/bs-alert}}
