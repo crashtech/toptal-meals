@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
-  context "with the correct role" do
-    authenticate_user(role: :admin)
+  context "authenticated as manager" do
+    authenticate_user(role: :manager)
 
     let(:user) {
       create(:user)
@@ -75,7 +75,18 @@ RSpec.describe "Users", type: :request do
     end
   end
 
-  context "without the correct role" do
+  context "authenticated as admin" do
+    authenticate_user(role: :admin)
+
+    describe "GET /" do
+      it "returns Ok" do
+        get users_path
+        expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  context "authenticated as user" do
     authenticate_user
 
     describe "GET /users" do
