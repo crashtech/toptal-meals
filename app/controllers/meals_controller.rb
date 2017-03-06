@@ -4,7 +4,7 @@ class MealsController < AuthenticatedController
 
   # GET /meals
   def index
-    @meals = Meal.available.exclusive(current_user)
+    @meals = Meal.available.exclusive(current_user).filter(filter_params)
     render @meals
   end
 
@@ -49,6 +49,11 @@ class MealsController < AuthenticatedController
     # Use callbacks to share common setup or constraints between actions.
     def set_meal
       @meal = Meal.available.exclusive(current_user).find(params[:id])
+    end
+
+    # Only accept these parameters as filter
+    def filter_params
+      params.permit(:date_lte, :date_gte, :time_lte, :time_gte)
     end
 
     # Only allow a trusted parameter "white list" through.

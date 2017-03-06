@@ -28,6 +28,10 @@ class Meal < ApplicationRecord
   scope :exclusive, -> (user) do
     where(user_id: user.id) if user.user?
   end
+  scope :date_lte, -> (date_lte) { where('date <= ?', date_lte) }
+  scope :date_gte, -> (date_gte) { where('date >= ?', date_gte) }
+  scope :time_lte, -> (time_lte) { where('time <= ?', time_lte) }
+  scope :time_gte, -> (time_gte) { where('time >= ?', time_gte) }
 
   import_table_validations
 end
