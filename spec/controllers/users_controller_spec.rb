@@ -8,6 +8,12 @@ RSpec.describe UsersController, type: :controller do
       get :index
       expect(assigns(:users)).to eq([@current_user])
     end
+
+    it "assigns filtered users as @users" do
+      user = create(:user)
+      get :index, params: { role: :user }
+      expect(assigns(:users)).to eq([user])
+    end
   end
 
   describe "GET #show" do

@@ -39,12 +39,14 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable, :lockable
+  has_many :meals, dependent: :destroy
 
   enum role: [ :user, :manager, :admin ]
 
   query_by :first_name, :last_name, :email
 
   default_scope { order(:first_name, :last_name) }
+  scope :role, -> (role) { where(role: role) }
 
   before_create :skip_confirmation_for_tests
   before_save :ensure_authentication_token
