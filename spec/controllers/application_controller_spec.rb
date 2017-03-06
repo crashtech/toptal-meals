@@ -54,4 +54,64 @@ RSpec.describe ApplicationController, type: :controller do
       end
     end
   end
+
+  describe "#render" do
+    before :each do
+      @mock_response = response.clone
+      controller.instance_variable_set(:@_response, @mock_response)
+    end
+
+    before :each do
+      create_list(:user, 100)
+    end
+
+    context "with query parameters" do
+      it "with :queryable option" do
+        name = 'xxyyzzaabbeeffgg'
+        create(:user, first_name: name)
+        params = ActionController::Parameters.new(q: name)
+        allow_any_instance_of(subject.class).to receive(:params).and_return(params)
+
+        controller.send(:render, User.all, queryable: true)
+        json = JSON.parse(@mock_response.body)
+
+        expect(json['data'].length).to eq(1)
+      end
+
+      it "without :queryable option" do
+        name = 'xxyyzzaabbeeffgg'
+        create(:user, first_name: name)
+        params = ActionController::Parameters.new(q: name)
+        allow_any_instance_of(subject.class).to receive(:params).and_return(params)
+
+        controller.send(:render, User.all)
+        json = JSON.parse(@mock_response.body)
+
+        expect(json['data'].length).to eq(101)
+      end
+    end
+
+    context "with pages parameters" do
+      it "with :paginable option" do
+        params = ActionController::Parameters.new(page: { number: 2, size: 15 })
+        allow_any_instance_of(subject.class).to receive(:params).and_return(params)
+
+        controller.send(:render, User.all, paginable: true)
+        json = JSON.parse(@mock_response.body)
+
+        expect(json).to have_key('links')
+        expect(json['data'].length).to eq(15)
+      end
+
+      it "without :paginable option" do
+        params = ActionController::Parameters.new(page: { number: 2, size: 15 })
+        allow_any_instance_of(subject.class).to receive(:params).and_return(params)
+
+        controller.send(:render, User.all)
+        json = JSON.parse(@mock_response.body)
+
+        expect(json['data'].length).to eq(100)
+      end
+    end
+  end
 end

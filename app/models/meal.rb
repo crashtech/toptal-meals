@@ -23,6 +23,8 @@
 class Meal < ApplicationRecord
   belongs_to :user
 
+  query_by :title, user: [:first_name, :last_name, :email]
+
   default_scope { order(time: :desc) }
   scope :available, -> { where(deleted: false) }
   scope :exclusive, -> (user) do
