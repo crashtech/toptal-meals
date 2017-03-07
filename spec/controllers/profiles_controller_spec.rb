@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, tser: :controller do
+RSpec.describe ProfilesController, type: :controller do
   login_user
 
   describe "GET #show" do

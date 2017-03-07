@@ -1,6 +1,9 @@
 # == Route Map
 #
 #               Prefix Verb   URI Pattern                     Controller#Action
+#             settings GET    /settings(.:format)             settings#show
+#                      PATCH  /settings(.:format)             settings#update
+#                      PUT    /settings(.:format)             settings#update
 #                meals GET    /meals(.:format)                meals#index
 #                      POST   /meals(.:format)                meals#create
 #                 meal GET    /meals/:id(.:format)            meals#show
@@ -28,6 +31,7 @@
 
 Rails.application.routes.draw do
 
+  resource :settings, except: [:destroy, :index, :create]
   resources :meals
 
   # Authentication routes, devise_for is required

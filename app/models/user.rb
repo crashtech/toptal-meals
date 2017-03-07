@@ -40,6 +40,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable,
          :trackable, :validatable, :confirmable, :lockable
   has_many :meals, dependent: :destroy
+  has_one :settings, dependent: :destroy
 
   enum role: [ :user, :manager, :admin ]
 

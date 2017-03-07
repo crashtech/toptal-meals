@@ -45,4 +45,8 @@ class UserSerializer < ApplicationSerializer
   attribute :role_description do
     object.role.humanize
   end
+
+  class SettingsSerializer < ApplicationSerializer
+    attributes :id, :calories_per_day
+  end
 end
