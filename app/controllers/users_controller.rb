@@ -27,6 +27,7 @@ class UsersController < AuthenticatedController
   # PATCH/PUT /users/1
   def update
     skip = [:email, :password, :password_confirmation]
+    skip << :role unless current_user.admin?
     if @user.update(user_params.except(*skip))
       render @user
     else

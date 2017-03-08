@@ -14,14 +14,28 @@ class ApplicationController < ActionController::API
 
   # Handle erors on ActiveRecord::Base#find
   def record_not_found(exception)
-    message = { error: { title: exception.message } }
+    message = { errors: [{ title: exception.message }] }
     render message, status: :not_found
   end
 
   # Handle errors with strong paraeters
   def invalid_data(exception)
-    message = { error: { title: exception.message } }
+    message = { errors: [{ title: exception.message }] }
     render message, status: :bad_request
+  end
+
+  # Handle all the answers from devise
+  def respond_with(resource, *args)
+    if resource.blank?
+      render nil
+    elsif resource.is_a?(ActiveModel::Errors)
+      model = resource.instance_variable_get(:@base)
+      render model, status: :unprocessable_entity
+    elsif !resource.valid?
+      render resource, status: :unprocessable_entity
+    else
+      render resource, adapter: :attributes, serializer: SessionSerializer
+    end
   end
 
   # Disable devise flash messages
@@ -45,8 +59,9 @@ class ApplicationController < ActionController::API
       object = object_with_query(object) if queryable
       object = object_with_pages(object) if paginable
 
-      if object.is_a?(ApplicationRecord) && !object.valid?
-        args.merge!(json: object, serializer: ErrorsSerializer)
+      if object.is_a?(ActiveRecord::Base) && object.errors.present?
+        serializer = ActiveModel::Serializer::ErrorSerializer
+        args.merge!(json: object, serializer: serializer)
       else
         args.merge!(object.nil? ? { status: :no_content } : { json: object })
       end

@@ -11,7 +11,8 @@ class AuthenticatedController < ApplicationController
 
   # Handle erors of permission
   def invalid_permission(exception)
-    message = { error: { title: I18n.t(:invalid_role, scope: :authorization) } }
+    title = I18n.t(:invalid_role, scope: :authorization)
+    message = { errors: [{ title: title }] }
     render message, status: :not_acceptable
   end
 

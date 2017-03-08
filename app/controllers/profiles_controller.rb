@@ -10,7 +10,7 @@ class ProfilesController < AuthenticatedController
 
   # POST /profile
   def create
-    @user = User.new(user_params)
+    @user = User.new(profile_params)
 
     if @user.save
       render @user, status: :created
@@ -21,7 +21,7 @@ class ProfilesController < AuthenticatedController
 
   # PATCH/PUT /profile
   def update
-    params = user_params.except(:email)
+    params = profile_params.except(:email)
     if params[:password].blank? && params[:password_confirmation].blank?
       params.delete(:password_confirmation)
       params.delete(:password)
@@ -41,8 +41,8 @@ class ProfilesController < AuthenticatedController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password,
-                                   :password_confirmation)
+    def profile_params
+      params.require(:profile).permit(:first_name, :last_name, :email,
+                                      :password, :password_confirmation)
     end
 end
