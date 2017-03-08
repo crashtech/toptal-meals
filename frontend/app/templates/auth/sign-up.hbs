@@ -1,0 +1,10 @@
+{{#authentication-layout subtitle='Sign Up' back=true}}
+  {{#bs-form model=model onSubmit=(route-action 'save') as |form|}}
+    {{form.element controlType='email' label='Email' placeholder='user@email.com' class='email' property='email'}}
+    {{form.element controlType='text' label='First name' placeholder='Your name' class='first-name' property='firstName'}}
+    {{form.element controlType='text' label='Last name' placeholder='Your last name' class='last-name' property='lastName'}}
+    {{form.element controlType='password' label='Password' placeholder='●●●●●●' class='password' property='password'}}
+    {{form.element controlType='password' label='Confirm password' placeholder='●●●●●●' class='password-confirmation' property='passwordConfirmation'}}
+    {{bs-button defaultText='Create' type='success' buttonType='submit' class='pull-right'}}
+  {{/bs-form}}
+{{/authentication-layout}}

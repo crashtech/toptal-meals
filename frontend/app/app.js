@@ -14,6 +14,7 @@ App = Ember.Application.extend({
 });
 
 Ember.Route.reopen({
+  flash: Ember.inject.service('flash'),
   hasLayout: true,
   setupController() {
     this._super(...arguments);

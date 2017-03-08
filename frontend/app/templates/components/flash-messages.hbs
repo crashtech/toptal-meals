@@ -21,11 +21,11 @@
     {{#bs-alert visible=true fade=true type=item.type dismissible=true}}
       <i class="glyphicon glyphicon-{{item.icon}}"></i>
       <div>
-        {{#if item.content.header}}
-          <h4>{{{item.content.header}}}</h4>
+        {{#if item.content.title}}
+          <h4>{{{item.content.title}}}</h4>
         {{/if}}
-        {{#if item.content.body}}
-          <p>{{{item.content.body}}}</p>
+        {{#if item.content.detail}}
+          <p>{{{item.content.detail}}}</p>
         {{/if}}
         {{#if item.content.messages}}
           <ul>
@@ -34,6 +34,18 @@
             {{/each}}
           </ul>
         {{/if}}
+      </div>
+    {{/bs-alert}}
+  {{else if item.validation}}
+    {{#bs-alert visible=true fade=true type=item.type dismissible=true}}
+      <i class="glyphicon glyphicon-{{item.icon}}"></i>
+      <div>
+        <h4>There were problems with the following fields:</h4>
+        <ul>
+          {{#each item.content as |piece|}}
+            <li>{{piece.detail}}</li>
+          {{/each}}
+        </ul>
       </div>
     {{/bs-alert}}
   {{/if}}

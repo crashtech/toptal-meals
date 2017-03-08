@@ -1,0 +1,20 @@
+{{#authentication-layout subtitle='Token Access' back=true}}
+  {{#bs-form model=model onSubmit=(route-action 'validate') as |form|}}
+    <div class="form-group token-type">
+      <label for="type">Token type</label>
+      {{#power-select options=types selected=model.type disabled=checking required=true onchange=(action (mut model.type)) as |name|}}
+        {{name.content}}
+      {{/power-select}}
+    </div>
+    {{form.element disabled=checking required=true controlType='text' label='Token' placeholder='...xYz1242...' property='token' class='token input-text-center'}}
+
+    {{#if model.type.showPassword}}
+      {{form.element controlType='password' label='Password' placeholder='●●●●●●' class='password' property='password'}}
+      {{form.element controlType='password' label='Confirm password' placeholder='●●●●●●' class='password-confirmation' property='passwordConfirmation'}}
+    {{/if}}
+
+    <div class="form-group">
+      {{bs-button defaultText='Submit' type='success' buttonType='submit' class='pull-right'}}
+    </div>
+  {{/bs-form}}
+{{/authentication-layout}}

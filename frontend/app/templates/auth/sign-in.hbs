@@ -1,0 +1,19 @@
+{{#authentication-layout}}
+  {{#bs-form model=model onSubmit=(route-action 'authenticate') as |form|}}
+    {{form.element controlType='email' label='Email' placeholder='user@email.com' class='email' property='email' required=true}}
+    {{form.element controlType='password' label='Password' placeholder='●●●●●●' class='password' property='password' required=true}}
+
+    <hr>
+
+    <div class="form-group row">
+      <div class="col-sm-12 col-md-6 controls">
+        {{link-to 'Sign up here' 'auth.sign-up' id='sign-up'}}<br>
+        {{link-to 'Recovery your password' 'auth.recover-password' id='recover-password'}}<br>
+        {{link-to 'Access with token' 'auth.token-access' id='token-access'}}
+      </div>
+      <div class="col-sm-12 col-md-6 controls">
+        {{bs-button defaultText='Sign In' type='success' buttonType='submit' class='pull-right'}}
+      </div>
+    </div>
+  {{/bs-form}}
+{{/authentication-layout}}
