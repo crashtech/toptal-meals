@@ -16,6 +16,9 @@ Router.map(function() {
   this.route('auth.recover-password', { path: '/recover-password' });
 
   this.route('dashboard');
+  this.route('settings', () => {});
+
+  this.resources('meals');
 });
 
 export default Router;

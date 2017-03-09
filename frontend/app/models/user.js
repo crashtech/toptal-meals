@@ -18,6 +18,8 @@ export default DS.Model.extend({
   roleDescription:      DS.attr('string'),
   role:                 DS.attr('string'),
 
+  settings:             DS.belongsTo('settings'),
+
   label: Ember.computed('firstName', 'email', function() {
     let info = `${this.get('firstName')} (${this.get('email')})`;
     return info.htmlSafe();

@@ -1,0 +1,13 @@
+{{flash-messages}}
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    {{#bs-form model=model onSubmit=(route-action 'save') as |form|}}
+      {{form.element controlType='number' label='Calories per day' placeholder='1200' property='caloriesPerDay' class='caloriesPerDay'}}
+
+      <div class="form-group">
+        {{bs-button defaultText='Save' type='success' buttonType='submit' class='pull-right'}}
+      </div>
+    {{/bs-form}}
+  </div>
+</div>

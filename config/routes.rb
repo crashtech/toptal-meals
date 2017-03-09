@@ -31,8 +31,10 @@
 
 Rails.application.routes.draw do
 
-  resource :settings, except: [:destroy, :index, :create]
   resources :meals
+  resource :settings, only: :show do
+    match '(/:id)', action: :update, via: [:put, :patch]
+  end
 
   # Authentication routes, devise_for is required
   devise_for :users, skip: :all
