@@ -14,12 +14,12 @@ RSpec.describe ProfilesController, type: :controller do
     context "with valid params" do
       it "creates a new user" do
         expect {
-          post :create, params: { user: attributes_for(:user) }
+          post :create, params: { profile: attributes_for(:user) }
         }.to change(User, :count).by(1)
       end
 
       it "assigns a newly created user as @user" do
-        post :create, params: { user: attributes_for(:user) }
+        post :create, params: { profile: attributes_for(:user) }
         expect(assigns(:user)).to be_a(User)
         expect(assigns(:user)).to be_persisted
       end
@@ -27,7 +27,7 @@ RSpec.describe ProfilesController, type: :controller do
 
     context "with invalid params" do
       it "assigns a newly created but unsaved user as @user" do
-        post :create, params: { user: attributes_for(:user, :invalid) }
+        post :create, params: { profile: attributes_for(:user, :invalid) }
         expect(assigns(:user)).to be_a_new(User)
         expect(assigns(:user)).to_not be_persisted
       end
@@ -35,14 +35,14 @@ RSpec.describe ProfilesController, type: :controller do
 
     context "with password confirmation not present" do
       it "assigns a newly created but unsaved user as @user" do
-        post :create, params: { user: attributes_for(:user).except(:password_confirmation) }
+        post :create, params: { profile: attributes_for(:user).except(:password_confirmation) }
         expect(assigns(:user)).to be_a_new(User)
       end
     end
 
     context "with mismatching password" do
       it "assigns a newly created but unsaved user as @user" do
-        post :create, params: { user: attributes_for(:user, password: '111222333') }
+        post :create, params: { profile: attributes_for(:user, password: '111222333') }
         expect(assigns(:user)).to be_a_new(User)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe ProfilesController, type: :controller do
 
       it "updates the requested user" do
         user = @current_user
-        put :update, params: { id: user.to_param, user: new_attributes }
+        put :update, params: { id: user.to_param, profile: new_attributes }
 
         user.reload
         skip = [:email, :password, :password_confirmation]
@@ -67,7 +67,7 @@ RSpec.describe ProfilesController, type: :controller do
 
       it "assigns the requested user as @user" do
         user = @current_user
-        put :update, params: { id: user.to_param, user: attributes_for(:user) }
+        put :update, params: { id: user.to_param, profile: attributes_for(:user) }
         expect(assigns(:user)).to eq(user)
         expect(assigns(:user).changed?).to be_falsey
       end
@@ -76,7 +76,7 @@ RSpec.describe ProfilesController, type: :controller do
     context "with invalid params" do
       it "assigns the user as @user" do
         user = @current_user
-        put :update, params: { id: user.to_param, user: attributes_for(:user, :invalid) }
+        put :update, params: { id: user.to_param, profile: attributes_for(:user, :invalid) }
         expect(assigns(:user)).to eq(user)
         expect(assigns(:user).changed?).to be_truthy
       end

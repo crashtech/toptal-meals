@@ -13,7 +13,7 @@ RSpec.describe "Profile", type: :request do
   describe "POST /profile" do
     context "with valid params" do
       it "returns Created" do
-        params = { user: attributes_for(:user) }
+        params = { profile: attributes_for(:user) }
         post profile_path, params: params
         expect(response).to have_http_status(:created)
       end
@@ -21,7 +21,7 @@ RSpec.describe "Profile", type: :request do
 
     context "with invalid params" do
       it "returns Unprocessable Entity" do
-        params = { user: attributes_for(:user, :invalid) }
+        params = { profile: attributes_for(:user, :invalid) }
         post profile_path, params: params
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -32,7 +32,7 @@ RSpec.describe "Profile", type: :request do
     context "with valid params" do
       it "returns Ok" do
         passw = @current_user.encrypted_password
-        params = { user: attributes_for(:user) }
+        params = { profile: attributes_for(:user) }
         put profile_path, params: params
 
         @current_user.reload
@@ -44,7 +44,7 @@ RSpec.describe "Profile", type: :request do
     context "with valid params and blank password" do
       it "returns Ok" do
         passw = @current_user.encrypted_password
-        params = { user: attributes_for(:user, password: '', password_confirmation: '') }
+        params = { profile: attributes_for(:user, password: '', password_confirmation: '') }
         put profile_path, params: params
 
         @current_user.reload
@@ -55,7 +55,7 @@ RSpec.describe "Profile", type: :request do
 
     context "with valid params and blank password confirmation" do
       it "returns Unprocessable Entity" do
-        params = { user: attributes_for(:user, password: '') }
+        params = { profile: attributes_for(:user, password: '') }
         put profile_path, params: params
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -63,7 +63,7 @@ RSpec.describe "Profile", type: :request do
 
     context "with invalid params" do
       it "returns Unprocessable Entity" do
-        params = { user: attributes_for(:user, :invalid) }
+        params = { profile: attributes_for(:user, :invalid) }
         put profile_path, params: params
         expect(response).to have_http_status(:unprocessable_entity)
       end
