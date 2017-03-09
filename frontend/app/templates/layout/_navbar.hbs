@@ -6,6 +6,14 @@
     <span class="icon-bar"></span>
   {{/navbar.toggle}}
   {{#navbar.content}}
-    {{side-menu}}
+    {{#if account.user}}
+      <nav>
+        {{link-to 'Register meal' 'meals.new'}}
+        {{link-to 'Meals' 'meals'}}
+        {{link-to 'Settings' 'settings'}}
+      </nav>
+    {{else if manager}}
+    {{else if admin}}
+    {{/if}}
   {{/navbar.content}}
 {{/bs-navbar}}
