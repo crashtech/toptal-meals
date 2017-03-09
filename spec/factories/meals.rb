@@ -25,7 +25,7 @@ FactoryGirl.define do
     title    { Faker::Lorem.sentence }
     calories { Faker::Number.between(5, 1500) }
     date     { Faker::Date.backward(14) }
-    time     { I18n.l(Faker::Time.backward(14), format: :hour) }
+    time     { I18n.l(Faker::Time.backward(14), format: :time) }
 
     trait :invalid do
       title    'a' * 101

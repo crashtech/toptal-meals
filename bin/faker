@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+require_relative '../config/environment'
+
+FAKE_USERS = 40
+FAKE_MANAGERS = 15
+
+FAKE_MEALS = 4000
+FAKE_DATES_BETWEEN = (3.months.ago.to_date..Date.today).to_a
+
+# Generate the list of users
+User.transaction do
+  users = FAKE_USERS.times.map do |idx|
+    email = "user%02d@test.com" % (idx + 1)
+    user = FactoryGirl.build(:user, email: email, role: :user)
+    user.skip_confirmation!
+    user.save
+
+    user.create_settings(FactoryGirl.attributes_for(:settings))
+    user
+  end
+
+  # Generate the list of reporters
+  reporters = FAKE_MANAGERS.times.map do |idx|
+    email = "manager%02d@test.com" % (idx + 1)
+    manager = FactoryGirl.build(:user, email: email, role: :manager)
+    manager.skip_confirmation!
+    manager.save
+    manager
+  end
+
+  # Generate the list of meals
+  FAKE_MEALS.times do
+    meal = FactoryGirl.build(:meal, date: FAKE_DATES_BETWEEN.sample)
+    meal.user = users.sample
+    meal.save
+  end
+end
