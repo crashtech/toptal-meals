@@ -19,6 +19,7 @@ Router.map(function() {
   this.route('settings', () => {});
 
   this.resources('meals');
+  this.resources('users');
 });
 
 export default Router;

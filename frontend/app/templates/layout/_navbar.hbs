@@ -12,8 +12,26 @@
         {{link-to 'Meals' 'meals'}}
         {{link-to 'Settings' 'settings'}}
       </nav>
-    {{else if manager}}
-    {{else if admin}}
+    {{else if account.manager}}
+      <section>
+        <header>{{link-to 'Users' 'users'}}</header>
+        <nav>
+          {{link-to 'Create user' 'users.new'}}
+        </nav>
+      </section>
+    {{else if account.admin}}
+      <section>
+        <header>{{link-to 'Meals' 'meals'}}</header>
+        <nav>
+          {{link-to 'New meal' 'meals.new'}}
+        </nav>
+      </section>
+      <section>
+        <header>{{link-to 'Users' 'users'}}</header>
+        <nav>
+          {{link-to 'Create user' 'users.new'}}
+        </nav>
+      </section>
     {{/if}}
   {{/navbar.content}}
 {{/bs-navbar}}

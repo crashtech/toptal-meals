@@ -5,6 +5,11 @@ export default Ember.Route.extend({
     return this.store.createRecord('meal');
   },
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('users', this.store.query('user', { role: 'user' }));
+  },
+
   actions: {
     save(record) {
       record.save().then(() => {

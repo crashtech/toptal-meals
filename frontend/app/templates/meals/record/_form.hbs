@@ -3,6 +3,15 @@
 <div class="panel panel-default">
   <div class="panel-body">
     {{#bs-form model=model onSubmit=(route-action 'save') as |form|}}
+      {{#if account.admin}}
+        <div class="form-group user">
+          <label for="user">User</label>
+          {{#power-select placeholder='Select the user' options=users selected=model.user onchange=(action (mut model.user)) as |user|}}
+            {{user.label}}
+          {{/power-select}}
+        </div>
+      {{/if}}
+
       {{form.element label='Title' placeholder='A Sample Type' property='title' class='title'}}
 
       <div class="row">

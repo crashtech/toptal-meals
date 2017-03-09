@@ -9,6 +9,14 @@
         <td>Title</td>
         <td>{{model.title}}</td>
       </tr>
+      {{#if account.admin}}
+        <tr>
+          <td>User</td>
+          <td>
+            {{link-to model.user.label 'users.record' model.user.id}}
+          </td>
+        </tr>
+      {{/if}}
       <tr>
         <td>Calories</td>
         <td>{{model.calories}}</td>

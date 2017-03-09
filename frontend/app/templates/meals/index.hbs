@@ -27,6 +27,9 @@
         <th>Title</th>
         <th width="100">Calories</th>
         <th width="120">Time ago</th>
+        {{#if account.admin}}
+          <th width="130">User</th>
+        {{/if}}
         <th width="100">Options</th>
       </tr>
     </thead>
@@ -36,6 +39,9 @@
           <td>{{entry.title}}</td>
           <td align="center">{{entry.calories}}</td>
           <td>{{entry.dateTimeAgo}}</td>
+          {{#if account.admin}}
+            <td title="{{entry.user.label}}">{{entry.user.firstName}}</td>
+          {{/if}}
           <td align="center">
             {{#link-to 'meals.record' entry.id title='Show'}}
               <i class="glyphicon glyphicon-eye-open" />

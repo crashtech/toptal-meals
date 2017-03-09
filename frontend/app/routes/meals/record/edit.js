@@ -4,6 +4,11 @@ import InheritedModel from 'frontend/mixins/inherited-model';
 export default Ember.Route.extend(InheritedModel, {
   copyOnly: true,
 
+  setupController(controller, model) {
+    this._super(controller, model);
+    controller.set('users', this.store.query('user', { role: 'user' }));
+  },
+
   actions: {
     save(record) {
       record.save().then(() => {
