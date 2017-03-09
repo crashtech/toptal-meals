@@ -6,5 +6,5 @@ moduleFor('adapter:application', 'Unit | Adapter | application');
 test('Path conversion to rails', function(assert) {
   let adapter = this.subject(), result;
   result = adapter.pathForType('book-store');
-  assert.equal(result, 'book_stores', 'Convert ember type to rails path name');
+  assert.equal(result, 'book_store', 'Convert ember type to rails path name');
 });

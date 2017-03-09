@@ -34,7 +34,7 @@ export default Ember.Service.extend({
   },
   add(type, icon, content) {
     let kind = (content.constructor === Array) ? 'array' : (typeof content);
-    kind = (kind == 'array' && content[0].source) ? 'validation' : kind;
+    kind = (kind === 'array' && content[0].source) ? 'validation' : kind;
 
     let message = {type: type, icon: icon, content: content};
 
