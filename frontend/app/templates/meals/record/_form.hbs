@@ -1,0 +1,25 @@
+{{flash-messages}}
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    {{#bs-form model=model onSubmit=(route-action 'save') as |form|}}
+      {{form.element label='Title' placeholder='A Sample Type' property='title' class='title'}}
+
+      <div class="row">
+        <div class="col-md-4">
+          {{form.element controlType='number' label='Calories' placeholder='80' property='calories' class='calories'}}
+        </div>
+        <div class="col-md-4">
+          {{form.element controlType='date' label='Date' property='date' class='date'}}
+        </div>
+        <div class="col-md-4">
+          {{form.element controlType='time' label='Time' property='time' class='time'}}
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{bs-button defaultText='Save' type='success' buttonType='submit' class='pull-right'}}
+      </div>
+    {{/bs-form}}
+  </div>
+</div>

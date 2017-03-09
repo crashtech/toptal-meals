@@ -25,7 +25,7 @@ class Meal < ApplicationRecord
 
   query_by :title, user: [:first_name, :last_name, :email]
 
-  default_scope { order(time: :desc) }
+  default_scope { order(date: :desc, time: :asc) }
   scope :available, -> { where(deleted: false) }
   scope :exclusive, -> (user) do
     where(user_id: user.id) if user.user?

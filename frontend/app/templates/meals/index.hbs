@@ -1,0 +1,62 @@
+{{!-- Flash messages before all --}}
+{{flash-messages}}
+
+{{!-- Table controllers --}}
+{{#bs-navbar class='table-navbar' as |navbar|}}
+  {{#navbar.nav as |nav|}}
+    {{#nav.item}}
+      {{#link-to 'meals.new'}}
+        <i class="glyphicon glyphicon-plus"></i> Register meal
+      {{/link-to}}
+    {{/nav.item}}
+  {{/navbar.nav}}
+
+  {{#navbar.nav class='navbar-right' as |nav|}}
+    {{#nav.item class='search'}}
+      {{input value=search id='q' key-up=(route-action 'searchChanged') placeholder="Search meal.."}}
+      <label for="q"><i class="glyphicon glyphicon-search"></i></label>
+    {{/nav.item}}
+  {{/navbar.nav}}
+{{/bs-navbar}}
+
+{{!-- List of records --}}
+<div class="panel panel-default table-panel">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th width="100">Calories</th>
+        <th width="120">Time ago</th>
+        <th width="100">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |entry|}}
+        <tr>
+          <td>{{entry.title}}</td>
+          <td align="center">{{entry.calories}}</td>
+          <td>{{entry.dateTimeAgo}}</td>
+          <td align="center">
+            {{#link-to 'meals.record' entry.id title='Show'}}
+              <i class="glyphicon glyphicon-eye-open" />
+            {{/link-to}}
+            {{#link-to 'meals.record.edit' entry.id title='Edit'}}
+              <i class="glyphicon glyphicon-pencil" />
+            {{/link-to}}
+            {{#link-to 'meals.record.delete' entry.id title='Delete'}}
+              <i class="glyphicon glyphicon-remove" />
+            {{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="100%">
+          {{link-to 'Register meal' 'meals.new' class='btn btn-default btn-sm'}}
+          {{table-pagination data=model.links page=(route-action 'goToPage')}}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

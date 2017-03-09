@@ -21,8 +21,20 @@
 #
 
 class MealSerializer < ApplicationSerializer
-  attributes :id, :title, :calories, :date, :time, :deleted
+  attributes :id, :title, :calories, :date
   has_one :user
+
+  attribute :date_formatted do
+    I18n.l object.date, format: :long
+  end
+
+  attribute :time_formatted do
+    I18n.l object.time, format: :hour
+  end
+
+  attribute :time do
+    I18n.l object.time, format: :time
+  end
 
   attribute :date_time_ago do
     time = object.date.to_time

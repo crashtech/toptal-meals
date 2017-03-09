@@ -5,7 +5,7 @@ class MealsController < AuthenticatedController
   # GET /meals
   def index
     @meals = Meal.available.exclusive(current_user).filter(filter_params)
-    render @meals
+    render @meals, queryable: true
   end
 
   # GET /meals/1

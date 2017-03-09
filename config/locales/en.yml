@@ -230,7 +230,8 @@ en:
       default: "%a, %d %b %Y %H:%M:%S %z"
       long: "%B %d, %Y %H:%M"
       short: "%d %b %H:%M"
-      hour: "%H:%M:%S"
+      time: "%H:%M:%S"
+      hour: "%I:%M %P"
     pm: pm
   authorization:
     invalid_role: You don't permission to perform this action

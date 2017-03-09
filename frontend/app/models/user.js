@@ -19,6 +19,7 @@ export default DS.Model.extend({
   role:                 DS.attr('string'),
 
   settings:             DS.belongsTo('settings'),
+  meals:                DS.hasMany('meal', { inverse: 'user' }),
 
   label: Ember.computed('firstName', 'email', function() {
     let info = `${this.get('firstName')} (${this.get('email')})`;
