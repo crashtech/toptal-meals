@@ -1,0 +1,16 @@
+{{!-- Record actions --}}
+{{#unless account.user}}
+  <nav class="btn-group" role="group">
+    {{#link-to 'users.record.edit' model.id class='btn btn-default'}}
+      <i class="glyphicon glyphicon-pencil"></i>
+      <span>Edit</span>
+    {{/link-to}}
+    {{#link-to 'users.record.delete' model.id class='btn btn-default'}}
+      <span>Delete</span>
+      <i class="glyphicon glyphicon glyphicon-trash"></i>
+    {{/link-to}}
+  </nav>
+{{/unless}}
+
+{{!-- Record data --}}
+{{partial 'users/record/infos'}}

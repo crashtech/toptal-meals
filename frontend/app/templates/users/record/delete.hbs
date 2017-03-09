@@ -1,0 +1,4 @@
+{{#delete-confirmation confirm=(route-action 'delete') fallback='users'}}
+  <h4>Do you want to delete the '{{model.firstName}} {{model.lastName}}' user?</h4>
+  <p>Any meal that this user has will be deleted too.</p>
+{{/delete-confirmation}}

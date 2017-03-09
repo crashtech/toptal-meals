@@ -1,0 +1,45 @@
+<div class="panel panel-default">
+  <table class="table record-table table-bordered table-striped">
+    <tbody>
+      <tr>
+        <td>#</td>
+        <td>{{model.id}}</td>
+      </tr>
+      <tr>
+        <td>Name</td>
+        <td>{{model.firstName}} {{model.lastName}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{model.email}}</td>
+      </tr>
+      <tr>
+        <td>Role</td>
+        <td>{{model.roleDescription}}</td>
+      </tr>
+      <tr>
+        <td>Created</td>
+        <td>{{model.createdAt}} ago</td>
+      </tr>
+      {{#unless account.user}}
+        {{#if model.confirmedAt}}
+          <tr>
+            <td>Confirmed</td>
+            <td>{{model.confirmedAt}} ago</td>
+          </tr>
+        {{else}}
+          <tr>
+            <td>Confirmation sent</td>
+            <td>{{model.confirmationSentAt}} ago</td>
+          </tr>
+        {{/if}}
+        {{#if lockedAt}}
+          <tr>
+            <td>Locked</td>
+            <td>{{model.lockedAt}} ago</td>
+          </tr>
+        {{/if}}
+      {{/unless}}
+    </tbody>
+  </table>
+</div>

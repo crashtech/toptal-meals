@@ -1,0 +1,42 @@
+{{flash-messages}}
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    {{#bs-form model=model onSubmit=(route-action 'save') as |form|}}
+      {{#if model.isNew}}
+        {{form.element controlType='email' label='Email' placeholder='user@email.com' property='email' class='email'}}
+      {{/if}}
+
+      <div class="row">
+        <div class="col-md-6">
+          {{form.element label='First name' placeholder='Smith' property='firstName' class='first-name'}}
+        </div>
+        <div class="col-md-6">
+          {{form.element label='Last name' placeholder='Johnson' property='lastName' class='last-name'}}
+        </div>
+      </div>
+
+      {{#if model.isNew}}
+        <div class="row">
+          <div class="col-md-6">
+            {{form.element controlType='password' label='Password' placeholder='●●●●●●' property='password' class='password'}}
+          </div>
+          <div class="col-md-6">
+            {{form.element controlType='password' label='Confirm password' placeholder='●●●●●●' property='passwordConfirmation' class='password-confirmation'}}
+          </div>
+        </div>
+      {{/if}}
+
+      <div class="form-group role">
+        <label for="type">Role</label>
+        {{#power-select options=model.roles selected=model.role onchange=(action (mut model.role)) as |role|}}
+          {{role}}
+        {{/power-select}}
+      </div>
+
+      <div class="form-group">
+        {{bs-button defaultText='Save' type='success' buttonType='submit' class='pull-right'}}
+      </div>
+    {{/bs-form}}
+  </div>
+</div>
