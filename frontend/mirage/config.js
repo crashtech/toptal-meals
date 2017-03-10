@@ -6,8 +6,15 @@ export default function() {
   this.resource('meals');
   this.resource('users');
   this.resource('profile');
+  this.resource('settings');
 
   // Session routes
+  this.get('/profile', () => {
+    return server.create('profile');
+  });
+  this.get('/settings', () => {
+    return server.create('settings');
+  });
   this.post('/profile/sign_in', () => {
     return server.create('session').attrs;
   });

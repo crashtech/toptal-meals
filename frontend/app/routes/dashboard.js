@@ -7,11 +7,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model() {
     let role = this.get('currentUser.data.role');
+    let filter = this.referenceToFilter();
     if(role !== 'user') {
-      return {};
+      return [];
     }
 
-    return this.store.query('meal', this.referenceToFilter());
+    return this.store.query('meal', filter);
   },
 
   dateToReference(date) {
