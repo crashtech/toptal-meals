@@ -7,6 +7,7 @@
 @import 'flash-messages';
 @import 'power-select';
 @import 'main-content';
+@import 'calendar';
 @import 'sidebar';
 @import 'header';
 @import 'tables';
@@ -47,6 +48,11 @@ label.required:after {
   margin-right: 15px;
 }
 
+// Link with JavaScript handler
+a.jsHandler {
+  cursor: pointer;
+}
+
 // Prevent resizing of textarea
 textarea {
   resize: vertical;
@@ -68,4 +74,18 @@ body > .ember-view {
     line-height: 48px;
     min-height: 48px;
   }
+}
+
+// Navbar center for title
+nav.navbar div.center {
+  left: 50%;
+  font-size: 1.5em;
+  line-height: 50px;
+  position: absolute;
+
+  transform: translate(-50%);
+  -webkit-transform: translate(-50%);
+  -moz-transform: translate(-50%);
+  -o-transform: translate(-50%);
+  -ms-transform: translate(-50%);
 }

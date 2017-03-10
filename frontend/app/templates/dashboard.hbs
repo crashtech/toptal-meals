@@ -1,2 +1,28 @@
 <h3>Dashboard</h3>
 {{flash-messages}}
+
+{{#if account.user}}
+  {{#bs-navbar class='table-navbar' as |navbar|}}
+    {{#navbar.nav as |nav|}}
+      {{#nav.item}}
+        <a class="jsHandler" onclick={{route-action 'changeReference' -1}}>
+          <i class="glyphicon glyphicon-circle-arrow-left"></i> Prev Month
+        </a>
+      {{/nav.item}}
+    {{/navbar.nav}}
+
+    <div class="center">{{monthTitle}}</div>
+
+    {{#navbar.nav class='navbar-right' as |nav|}}
+      {{#nav.item}}
+        <a class="jsHandler" onclick={{route-action 'changeReference' 1}}>
+          Next Month <i class="glyphicon glyphicon-circle-arrow-right"></i>
+        </a>
+      {{/nav.item}}
+    {{/navbar.nav}}
+  {{/bs-navbar}}
+
+  <div class="panel panel-default table-panel">
+    {{simple-calendar records=model reference=reference calories=settings.caloriesPerDay}}
+  </div>
+{{/if}}

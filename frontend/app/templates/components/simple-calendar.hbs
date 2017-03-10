@@ -1,0 +1,24 @@
+<section id="calendar">
+  <div class="header">
+    <span>Sun</span>
+    <span>Mon</span>
+    <span>Tue</span>
+    <span>Wed</span>
+    <span>The</span>
+    <span>Fri</span>
+    <span>Sat</span>
+  </div>
+  <div class="body">
+    {{#each date as |entry|}}
+      <span class="{{if entry.extra 'extra'}}">
+        <small>{{entry.day}}</small>
+        {{#if entry.meals}}
+          {{pluralize entry.meals 'meal'}}<br>
+          <b class="{{if entry.surpassed 'red' 'green'}}">
+            {{entry.calories}} calories
+          </b>
+        {{/if}}
+      </span>
+    {{/each}}
+  </div>
+</section>

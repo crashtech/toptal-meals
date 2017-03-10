@@ -6,9 +6,11 @@ export default DS.Model.extend({
   calories:      DS.attr('number'),
   date:          DS.attr('string'),
   time:          DS.attr('string'),
+
+  dateTimeAgo:   DS.attr('string'),
   dateFormatted: DS.attr('string'),
   timeFormatted: DS.attr('string'),
-  dateTimeAgo:   DS.attr('string'),
+  meals:         DS.attr('number'),
 
   user:        DS.belongsTo('user')
 });

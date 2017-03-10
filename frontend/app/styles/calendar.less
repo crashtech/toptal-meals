@@ -1,0 +1,56 @@
+// Dashboard calenadr style
+section#calendar {
+  width: 100%;
+  position: relative;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+
+  // Cells style
+  > div > span {
+    float: left;
+    display: block;
+    width: calc(100% / 7);
+    border-right: 1px solid #ddd;
+    &:nth-child(7n) {
+      border-right: none;
+    }
+  }
+
+  // Header style
+  > div.header span {
+    line-height: 2em;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  // Body style
+  > div.body span {
+    height: 5.5em;
+    padding: 0 0.5em;
+    text-align: right;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    border-top: 1px solid #ddd;
+
+    &.extra {
+      color: #ddd;
+    }
+
+    small {
+      display: block;
+      padding: 0.5em 0;
+      text-align: left;
+    }
+
+    b.green {
+      color: #5cc12b;
+    }
+    b.red {
+      color: #dd3236;
+    }
+  }
+}
