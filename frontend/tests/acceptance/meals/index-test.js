@@ -3,7 +3,7 @@ import moduleForAcceptance from 'frontend/tests/helpers/module-for-acceptance';
 
 moduleForAcceptance('Acceptance | meals index');
 
-test('admin and normal users users see a list of meals', function(assert) {
+test('admin and normal users see a list of meals', function(assert) {
   server.createList('meal', 10);
   authenticateWithRole('user');
   visit('/dashboard');
