@@ -5,7 +5,7 @@
   {{#bs-navbar class='table-navbar' as |navbar|}}
     {{#navbar.nav as |nav|}}
       {{#nav.item}}
-        <a class="jsHandler" onclick={{route-action 'changeReference' -1}}>
+        <a class="clickable" onclick={{route-action 'changeReference' -1}}>
           <i class="glyphicon glyphicon-circle-arrow-left"></i> Prev Month
         </a>
       {{/nav.item}}
@@ -15,7 +15,7 @@
 
     {{#navbar.nav class='navbar-right' as |nav|}}
       {{#nav.item}}
-        <a class="jsHandler" onclick={{route-action 'changeReference' 1}}>
+        <a class="clickable" onclick={{route-action 'changeReference' 1}}>
           Next Month <i class="glyphicon glyphicon-circle-arrow-right"></i>
         </a>
       {{/nav.item}}

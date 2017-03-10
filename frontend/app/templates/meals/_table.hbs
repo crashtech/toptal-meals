@@ -1,0 +1,46 @@
+<div class="panel panel-default table-panel">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th width="100">Calories</th>
+        <th width="120">Time ago</th>
+        {{#if account.admin}}
+          <th width="130">User</th>
+        {{/if}}
+        <th width="100">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |entry|}}
+        <tr>
+          <td>{{entry.title}}</td>
+          <td align="center">{{entry.calories}}</td>
+          <td>{{entry.dateTimeAgo}}</td>
+          {{#if account.admin}}
+            <td title="{{entry.user.label}}">{{entry.user.firstName}}</td>
+          {{/if}}
+          <td align="center">
+            {{#link-to 'meals.record' entry.id title='Show'}}
+              <i class="glyphicon glyphicon-eye-open" />
+            {{/link-to}}
+            {{#link-to 'meals.record.edit' entry.id title='Edit'}}
+              <i class="glyphicon glyphicon-pencil" />
+            {{/link-to}}
+            {{#link-to 'meals.record.delete' entry.id title='Delete'}}
+              <i class="glyphicon glyphicon-remove" />
+            {{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="100%">
+          {{link-to 'Register meal' 'meals.new' class='btn btn-default btn-sm'}}
+          {{table-pagination data=model.links page=(route-action 'goToPage')}}
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

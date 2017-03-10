@@ -1,0 +1,41 @@
+{{#bs-navbar class='table-navbar' as |navbar|}}
+  {{#navbar.nav as |nav|}}
+    {{#nav.item}}
+      {{#link-to 'meals.new'}}
+        <i class="glyphicon glyphicon-plus"></i> Register meal
+      {{/link-to}}
+    {{/nav.item}}
+    {{#bs-dropdown tagName='li' closeOnMenuClick=false as |dd|}}
+      {{#dd.toggle}}
+        <span>Filters</span>
+        <span class="caret"></span>
+      {{/dd.toggle}}
+      {{#dd.menu class='filters'}}
+        <li>
+          <label for="dateGte">Date from</label>
+          {{input type='date' value=filters.dateGte id='dateGte'}}
+        </li>
+        <li>
+          <label for="dateLte">Date to</label>
+          {{input type='date' value=filters.dateLte id='dateLte'}}
+        </li>
+        <li>
+          <label for="timeGte">Time from</label>
+          {{input type='time' value=filters.timeGte id='timeGte'}}
+        </li>
+        <li>
+          <label for="timeLte">Time to</label>
+          {{input type='time' value=filters.timeLte id='timeLte'}}
+        </li>
+        <li class="apply" onclick={{route-action 'applyFilters'}}>Apply filters</li>
+      {{/dd.menu}}
+    {{/bs-dropdown}}
+  {{/navbar.nav}}
+
+  {{#navbar.nav class='navbar-right' as |nav|}}
+    {{#nav.item class='search'}}
+      {{input value=search id='q' key-up=(route-action 'searchChanged') placeholder="Search meal.."}}
+      <label for="q"><i class="glyphicon glyphicon-search"></i></label>
+    {{/nav.item}}
+  {{/navbar.nav}}
+{{/bs-navbar}}
