@@ -8,7 +8,7 @@ export default Ember.Component.extend({
     let values = this.initialDays();
     let baseMonth = this.get('reference.month');
 
-    while(date.getMonth() == baseMonth - 1) {
+    while(date.getMonth() === baseMonth - 1) {
       values.push(this.getEntry(date.getDate()));
       date.setDate(date.getDate() + 1);
     }
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   entries: computed('records', function() {
     let result  = {};
     this.get('records').forEach((entry) => {
-      let day = Number.parseInt(entry.get('date').split('-')[2])
+      let day = parseInt(entry.get('date').split('-')[2]);
       result[day] = entry;
     });
 
@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     let result = [];
 
     date.setDate(-date.getDay() + 1);
-    while(date.getDate() != 1) {
+    while(date.getDate() !== 1) {
       result.push({extra: true, day: date.getDate()});
       date.setDate(date.getDate() + 1);
     }
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
     let date = this.getDate(true);
     let result = [];
 
-    while(date.getDay() != 0) {
+    while(date.getDay() !== 0) {
       result.push({extra: true, day: date.getDate()});
       date.setDate(date.getDate() + 1);
     }
@@ -65,7 +65,6 @@ export default Ember.Component.extend({
   // Get a date entry for a given day
   getEntry(day) {
     let entry = this.get(`entries.${day}`) || new Ember.Object();
-    entry.set('surpassed', this.get('calories'));
     entry.set('day', day);
 
     let calories = entry.get('calories');

@@ -15,7 +15,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   dateToReference(date) {
-    let reference = {month: date.getMonth() + 1, year: date.getFullYear()}
+    let reference = {month: date.getMonth() + 1, year: date.getFullYear()};
     this.set('reference', reference);
   },
 

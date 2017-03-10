@@ -1,6 +1,8 @@
 import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('user', 'Unit | Model | user');
+moduleForModel('user', 'Unit | Model | user', {
+  needs: ['model:settings', 'model:meal']
+});
 
 test('it has a label with first name and email', function(assert) {
   let model = this.subject({
