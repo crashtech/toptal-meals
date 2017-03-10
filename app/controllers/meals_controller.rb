@@ -53,7 +53,7 @@ class MealsController < AuthenticatedController
 
     # Only accept these parameters as filter
     def filter_params
-      params.permit(:date_lte, :date_gte, :time_lte, :time_gte)
+      params.permit(:date_lte, :date_gte, :time_lte, :time_gte, :month_details)
     end
 
     # Only allow a trusted parameter "white list" through.

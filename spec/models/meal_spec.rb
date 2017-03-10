@@ -20,33 +20,20 @@
 #  index_meals_on_user_id  (user_id)
 #
 
-class MealSerializer < ApplicationSerializer
-  attributes :id, :title, :calories, :date
-  has_one :user
+require 'rails_helper'
 
-  attribute :date_formatted do
-    I18n.l object.date, format: :long
-  end
+RSpec.describe Meal, type: :model do
+  describe "month_details" do
+    it "summarizes a month" do
+      user = create(:user)
+      date = Date.today
+      create(:meal, user_id: user.id, date: date.next_month)
+      create_list(:meal, 2, user_id: user.id, date: date, calories: 100)
 
-  attribute :time_formatted do
-    I18n.l object.time, format: :hour
-  end
-
-  attribute :time do
-    I18n.l object.time, format: :time
-  end
-
-  attribute :date_time_ago do
-    time = object.date.to_time
-    time += object.time.seconds_since_midnight
-    time_ago_in_words(time)
-  end
-
-  attribute :meals do
-    object.try(:meals)
-  end
-
-  class UserSerializer < ApplicationSerializer
-    attributes :first_name, :last_name, :email
+      filter = date.strftime('%Y-%m')
+      result = subject.class.exclusive(user).month_details(filter)
+      expect(result.length).to be_eql(1)
+      expect(result.first.calories).to be_eql(200)
+    end
   end
 end

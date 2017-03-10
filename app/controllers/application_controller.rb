@@ -111,7 +111,7 @@ class ApplicationController < ActionController::API
 
     # Check for a JSON Api query argument
     def object_with_query(object)
-      return object unless params.key?(:q) || params[:q].blank?
+      return object unless params.key?(:q) && !params[:q].blank?
       object.query(params[:q])
     end
 
