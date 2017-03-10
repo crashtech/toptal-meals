@@ -3,6 +3,7 @@ import UnauthenticatedRouteMixin from 'ember-simple-auth/mixins/unauthenticated-
 
 const service = Ember.inject.service;
 export default Ember.Route.extend(UnauthenticatedRouteMixin, {
+  currentUser: service('current-user'),
   session: service('session'),
 
   authenticator: 'authenticator:devise',
@@ -20,7 +21,11 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
       // Send the authentication request
       let email    = form.get('email');
       let password = form.get('password');
-      let promise = session.authenticate(auth, email, password).catch((reason) => {
+      let promise = session.authenticate(auth, email, password).then(() => {
+        this.get('currentUser').load().then(() => {
+          this.transitionTo('dashboard');
+        });
+      }).catch((reason) => {
         this.get('flash').error(reason.error).now();
       });
 
