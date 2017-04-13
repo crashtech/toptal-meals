@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   end
 
   # API Information on root
+  get '/info', to: 'application#index'
   root 'application#index'
 
 end
